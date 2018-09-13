@@ -26,4 +26,3 @@ def process_sniffed_packet(packet):
             print("\n\n[+] I think I get a possible username/password at" + url + " > " + login_info + "\n\n")
 
 sniff("eth0")
-
