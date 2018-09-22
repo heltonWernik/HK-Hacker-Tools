@@ -10,7 +10,7 @@ import scapy.all as scapy
 # iptables -I INPUT -j NFQUEUE --queue-num 0
 
 # in the end use > iptables --flush
-# TODO: use subprocess to do this command
+# TODO: use subprocess to do the iptables commands
 # pip install netfilterqueue
 
 def process_packet(packet):
