@@ -1,4 +1,5 @@
 {
     "python.linting.enabled": false,
-    "python.jediEnabled":  false
+    "python.jediEnabled": false,
+    "python.pythonPath": "/Users/heltonwernik/.local/share/virtualenvs/hck-Lhd1N_-T/bin/python"
 }

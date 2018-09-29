@@ -2,3 +2,4 @@
 Pipfile.*
 Pipfile
 .vscode/*
+.vscode/settings.json
