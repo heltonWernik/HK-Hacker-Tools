@@ -27,7 +27,7 @@ def get_current_mac(interface):
     if mac_address_search_result:
         return mac_address_search_result.group(0)
     else:
-        print "(x) Could not read MAC address." 
+        print("(x) Could not read MAC address.") 
 
 
 options = get_arguments()
