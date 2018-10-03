@@ -3,6 +3,7 @@ import scapy.all as scapy
 # from scapy.layers import http
 import scapy_http.http as http
 
+# pip install scapy-http
 # @TODO: to work with HTTPS needs to use SSLstrip:
 # iptables --flush
 # iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000

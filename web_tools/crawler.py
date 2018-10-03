@@ -11,7 +11,7 @@ def request(url):
     except requests.exceptions.ConnectionError:
         pass
 
-target_url = "http://172.16.143.128/mutillidae/"
+target_url = "docdok.health"
 
 with open("wordlists/subdomains-wodlist.txt", "r") as wordlist_file:
     for line in wordlist_file:

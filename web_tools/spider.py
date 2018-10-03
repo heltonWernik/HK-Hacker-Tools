@@ -4,7 +4,7 @@ import requests
 import re
 import urlparse
 
-target_url = "https://brasilia.io/"
+target_url = "https://docdok.health"
 target_links = []
 
 def extract_links_from(url):
