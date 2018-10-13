@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import scapy.all as scapy
-import sys
 
 def get_mac(ip):
     arp_request = scapy.ARP(pdst=ip)
