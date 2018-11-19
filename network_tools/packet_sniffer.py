@@ -8,6 +8,7 @@ import scapy_http.http as http
 # iptables --flush
 # iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 # another terminal the command: sslstrip
+# add get default interface
  
 def sniff(interface):
     scapy.sniff(iface=interface, store=False, prn=process_sniffed_packet)
