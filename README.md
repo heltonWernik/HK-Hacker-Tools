@@ -38,3 +38,6 @@ I still have a lot to do :)
 
 ### Vulnerability Scanner to find XSS:
 ![](vuln-scanner-XSS.gif)
+
+### Spider a Dark Web and create a table with all links, titles, texts and emails:
+![](dark_spider.gif)
