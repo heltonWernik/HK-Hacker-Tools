@@ -10,6 +10,8 @@ I still have a lot to do :)
 ## Defense
 - [Arp Spoof Detector](Defense/arp_spoof_detector.py)
 - [Anti-Virus](Defense/anti_virus.py)
+## OSINT
+- [Dark Web Spider](OSINT/dark_spider.py)
 ## Malware
 - [keylogger](malware/keylogger)
 - [Download file, Execute and report by email](malware/download_execute_report.py)
