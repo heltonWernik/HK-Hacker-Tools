@@ -18,6 +18,7 @@ headers = {}
 def get_response(url):
     try:
         headers['User-agent'] = get_fake_user_agent()
+        session.cookies.clear()
         response = session.get(url, headers=headers)
         return response
     except (KeyboardInterrupt, SystemExit):
